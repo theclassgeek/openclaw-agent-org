@@ -8,31 +8,53 @@ async function main() {
   const nodes = new Map(data.nodes.map((n) => [n.id, n]));
   const children = new Map();
 
+  const hoverName = document.getElementById('hover-name');
+  const hoverRole = document.getElementById('hover-role');
+  const hoverSummary = document.getElementById('hover-summary');
+  const hoverMeta = document.getElementById('hover-meta');
+
+  function setHover(node) {
+    if (!node) {
+      hoverName.textContent = data.title;
+      hoverRole.textContent = 'Move over a card to inspect an agent.';
+      hoverSummary.textContent = 'Details about the selected node will appear here.';
+      hoverMeta.textContent = '';
+      return;
+    }
+    hoverName.textContent = node.name;
+    hoverRole.textContent = `${node.role} · ${node.kind}`;
+    hoverSummary.textContent = node.summary || '';
+    const bits = [];
+    if (node.meta?.channel) bits.push(`Channel: ${node.meta.channel}`);
+    if (node.meta?.agentId) bits.push(`Agent ID: ${node.meta.agentId}`);
+    if (node.status) bits.push(`Status: ${node.status}`);
+    const manager = node.reportsTo ? nodes.get(node.reportsTo)?.name : null;
+    if (manager) bits.push(`Reports to: ${manager}`);
+    hoverMeta.textContent = bits.join(' · ');
+  }
+
   data.nodes.forEach((node) => {
     const parent = node.reportsTo || '__root__';
     if (!children.has(parent)) children.set(parent, []);
     children.get(parent).push(node);
   });
 
-  function renderLevel(parentId, target) {
+  function renderLevel(parentId, target, isRoot = false) {
     const items = children.get(parentId) || [];
     if (!items.length) return;
 
     const level = document.createElement('div');
-    level.className = 'level';
+    level.className = `level ${isRoot ? 'level--root' : 'level--children'}`;
 
     items.forEach((node) => {
       const wrap = document.createElement('div');
       wrap.className = 'node-wrap';
 
-      if (parentId !== '__root__') {
-        const connector = document.createElement('div');
-        connector.className = 'connector';
-        wrap.appendChild(connector);
-      }
-
       const card = document.createElement('article');
       card.className = 'card';
+      card.addEventListener('mouseenter', () => setHover(node));
+      card.addEventListener('focusin', () => setHover(node));
+      card.addEventListener('mouseleave', () => setHover(null));
 
       const badge = document.createElement('div');
       badge.className = 'badge';
@@ -74,10 +96,11 @@ async function main() {
     });
 
     target.appendChild(level);
-    items.forEach((node) => renderLevel(node.id, target));
+    items.forEach((node) => renderLevel(node.id, target, false));
   }
 
-  renderLevel('__root__', chart);
+  setHover(null);
+  renderLevel('__root__', chart, true);
 }
 
 main().catch((error) => {

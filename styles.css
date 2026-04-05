@@ -42,35 +42,65 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 34px;
+  gap: 0;
 }
 .level {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 28px;
   width: 100%;
+  padding-top: 34px;
+}
+.level--root {
+  padding-top: 0;
+}
+.level--children::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(to bottom, #cfd8e6, #e8edf5);
+}
+.level--children::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, calc(100% - 80px));
+  height: 2px;
+  background: #d6dfeb;
 }
 .node-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
+  position: relative;
 }
-.connector {
+.level--children .node-wrap::before {
+  content: "";
+  position: absolute;
+  top: -16px;
   width: 2px;
-  height: 28px;
+  height: 16px;
   background: linear-gradient(to bottom, #cfd8e6, #e8edf5);
 }
 .card {
-  width: 250px;
-  background: rgba(255,255,255,0.92);
+  width: 340px;
+  min-height: 220px;
+  background: rgba(255,255,255,0.94);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(215,223,235,0.9);
   border-radius: 28px;
   box-shadow: var(--shadow);
-  padding: 22px 20px 20px;
-  text-align: center;
+  padding: 22px 22px 20px;
+  text-align: left;
   position: relative;
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
@@ -89,7 +119,7 @@ h1 {
 }
 .name {
   margin: 0;
-  font-size: 22px;
+  font-size: 24px;
 }
 .role {
   margin: 6px 0 12px;
@@ -123,7 +153,46 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+.hover-panel {
+  position: sticky;
+  bottom: 20px;
+  margin: 36px auto 0;
+  width: min(760px, 100%);
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fbff;
+  border-radius: 24px;
+  padding: 20px 22px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.24);
+}
+.hover-panel__label {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  color: #99a8c8;
+}
+.hover-panel h2 {
+  margin: 0;
+  font-size: 24px;
+}
+.hover-panel__role {
+  margin: 6px 0 10px;
+  color: #8ecbff;
+  font-weight: 700;
+}
+.hover-panel__summary,
+.hover-panel__meta {
+  margin: 0;
+  line-height: 1.5;
+  color: #d3ddf0;
+}
+.hover-panel__meta {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #aab7d1;
+}
 @media (max-width: 640px) {
-  .card { width: min(100%, 320px); }
+  .card { width: min(100%, 360px); min-height: 0; }
   .page { padding-inline: 16px; }
+  .level--children::after { width: calc(100% - 32px); }
 }
