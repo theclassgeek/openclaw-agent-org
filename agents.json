@@ -51,7 +51,7 @@
       "reportsTo": "sapling-launch",
       "status": "active",
       "kind": "agent",
-      "avatar": "assets/sapling-launch.png",
+      "avatar": "assets/sapling-website.png",
       "summary": "Owns the quality, trust, proof, media, and conversion strength of the Sapling marketing website.",
       "meta": {
         "channel": "#sapling-website",
