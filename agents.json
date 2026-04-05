@@ -43,6 +43,20 @@
         "channel": "#sapling-launch",
         "agentId": "sapling-launch"
       }
+    },
+    {
+      "id": "sapling-website",
+      "name": "Sapling Website",
+      "role": "Website & Content Marketing",
+      "reportsTo": "sapling-launch",
+      "status": "active",
+      "kind": "agent",
+      "avatar": "assets/sapling-launch.png",
+      "summary": "Owns the quality, trust, proof, media, and conversion strength of the Sapling marketing website.",
+      "meta": {
+        "channel": "#sapling-website",
+        "agentId": "sapling-website"
+      }
     }
   ]
 }
