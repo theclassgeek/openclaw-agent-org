@@ -1,0 +1,48 @@
+{
+  "title": "OpenClaw Agent Org Chart",
+  "subtitle": "Current active human and agent structure",
+  "updatedAt": "2026-04-05",
+  "nodes": [
+    {
+      "id": "james",
+      "name": "James",
+      "role": "Human",
+      "reportsTo": null,
+      "status": "active",
+      "kind": "human",
+      "avatar": "assets/james.png",
+      "summary": "Owner and operator of the OpenClaw system.",
+      "meta": {
+        "label": "Human"
+      }
+    },
+    {
+      "id": "agent-steward",
+      "name": "Agent Steward",
+      "role": "Ops & Stewardship",
+      "reportsTo": "james",
+      "status": "active",
+      "kind": "agent",
+      "avatar": "assets/agent-steward.png",
+      "summary": "Designs, configures, tests, and refines agent workspaces and operating patterns.",
+      "meta": {
+        "channel": "#agent-steward",
+        "agentId": "main"
+      }
+    },
+    {
+      "id": "sapling-launch",
+      "name": "Sapling Launch",
+      "role": "Launch Owner",
+      "reportsTo": "agent-steward",
+      "status": "active",
+      "kind": "agent",
+      "avatar": "assets/sapling-launch.png",
+      "summary": "Coordinates launch readiness and launch execution for Sapling.",
+      "meta": {
+        "channel": "#sapling-launch",
+        "agentId": "sapling-launch"
+      }
+    }
+  ]
+}
