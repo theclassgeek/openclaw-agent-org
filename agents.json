@@ -10,7 +10,7 @@
       "reportsTo": null,
       "status": "active",
       "kind": "human",
-      "avatar": "assets/james.png",
+      "avatar": "assets/New LI Headshot.png",
       "summary": "Owner and operator of the OpenClaw system.",
       "meta": {
         "label": "Human"
@@ -34,7 +34,7 @@
       "id": "sapling-launch",
       "name": "Sapling Launch",
       "role": "Launch Owner",
-      "reportsTo": "agent-steward",
+      "reportsTo": "james",
       "status": "active",
       "kind": "agent",
       "avatar": "assets/sapling-launch.png",
